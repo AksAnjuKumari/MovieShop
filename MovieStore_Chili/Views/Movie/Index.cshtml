@@ -1,0 +1,35 @@
+
+
+
+@using PagedList; 
+
+
+﻿
+@{
+    ViewData["Title"] = "Movie Store";
+}
+
+<h1 align="center">Movie Store</h1>
+<hr/>
+<div class="container">
+    <div class="row">
+        @foreach(var item in Model)
+        {
+            <div class="col-md-3 col-sm-12">
+            <partial name="_MoviePatial" model="item"></partial>
+            </div>
+        }
+    </div>
+
+     Page @(Model.PageCount<Model.PageNumber ? 0 :Model.PageNumber)of @Model.PageCount
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="@(i == Model.PageNumber ? "page-item active" : "page-item")">
+                <a class="page-link" href=@Url.Action("", new {page=i})>@i</a>
+            </li>
+        }
+    </ul>
+</div>
+
+

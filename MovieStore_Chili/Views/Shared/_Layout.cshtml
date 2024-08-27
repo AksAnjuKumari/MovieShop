@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MovieStore_Chili</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/MyTheme.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MovieStore_Chili.styles.css" asp-append-version="true" />
+</head>
+<body>
+    
+    <header>
+        <div>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Logo12.png" height=50px; width=150px; /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Movie" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Search by
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="SortedByPopularMovies">Populer Movies</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="SortedByOldest">Oldest Movies</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="SortedByCheapest">Cheapest Movies</a></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Home" asp-action="SortedByNewest">Newest Movies
+                                     </a>
+                                        </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Home" asp-action="MostExpensiveOrder">
+                                            MostExpensiveCustomer
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    OrderList
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="CustomersOrders">Customer Orders</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="AllOrder">All Orders</a></li>
+                                  
+                                   
+                                </ul>
+                            </li>
+                            </li>
+                            <li class="nav-item fw-bold">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="AboutUs"> About Us </a>
+                            </li>
+                            <li class="nav-item fw-bold">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="SelectedMovieList">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                    </svg>
+                                    @if (Context.Session.GetString("SelectedMovieIds") != null)
+                                    {
+                                        var itemCount = Context.Session.GetString("SelectedMovieIds").Split(',').Length;
+                                        <div class="item-count cart-icon">
+                                        @itemCount
+                                        </div>
+                                    }
+
+                                </a>
+                            </li>
+                            @* <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index"> Order </a>
+                            </li> *@
+                            
+                        </ul>
+                        @* <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form> *@
+                        <div>
+                            <form class="d-flex" method="get" action="@Url.Action("SearchByTitle", "Home")">
+
+                                <input class="form-control me-2"type="text" placeholder="Search by title" name="search" id="search" />
+                                <button class="btn btn-success type="submit">Search</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+       
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container container">
+            &copy; 2024 - ChiliTeam <a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@model MovieStore_Chili.Models.ViewModels.FrontPageVM;
+
+
+ <h3 style="text-align:center"><b>Newest Movies</b></h3>
+ <section class="movies">
+	
+@foreach(var item in Model.NewestMovies)
+ {
+   <div class="movie-card">
+
+     <div class="movie-image">
+
+				<img style="height:300px;width:190px" src="/Images/@item.Image">
+
+
+
+	</div>
+		<div class="movie-info">
+			<h5><b>@item.Title</b></h5>
+			  <h6>@item.Director </h6>
+			   <h6>@item.ReleaseYear</h6>
+			   <h6>$@item.Price</h6>
+				<button type="button" class="btn btn-primary">Add to cart</button>
+        </div>
+		</div>
+	}
+	</section>
+       
+
+<h3 style="text-align:center"><b>Oldest Movies</b></h3>
+<section class="movies">
+@foreach (var item in Model.OldestMovies)
+{
+	<div class="movie-card">
+
+			<div class="movie-image">
+				<img style="height:300px;width:190px" src="/Images/@item.Image">
+			</div>
+
+		<div class="movie-info">
+				<h5><strong>@item.Title</strong></h5>
+			<h6>@item.Director </h6>
+			<h6>@item.ReleaseYear</h6>
+			<h6>$@item.Price</h6>
+				<button type="button" onclick="add(@item.Id)" class="btn btn-primary">Add to cart</button>
+		</div>
+	</div>
+}
+</section>
+<h3 style="text-align:center"><b>Cheapest Movies</b></h3>
+<section class="movies">
+	@foreach (var item in Model.CheapestMovies)
+	{
+		<div class="movie-card">
+
+			<div class="movie-image">
+				<img style="height:300px;width:190px" src="/Images/@item.Image">
+			</div>
+
+			<div class="movie-info">
+				<h5><strong>@item.Title</strong></h5>
+				<h6>@item.Director </h6>
+				<h6>@item.ReleaseYear</h6>
+				<h6>$@item.Price</h6>
+				<button type="button" class="btn btn-primary">Add to cart</button>
+			</div>
+		</div>
+	}
+</section>
+@* <div class="pagination">
+	@for (int i = 1; i <= Model.TotalPages; i++)
+	{
+		if (i == Model.CurrentPage)
+		{
+			<a href="/Home/Index?currentPage=@i&term=@Model.Term" class="active">@i</a>
+		}
+		else
+		{
+			<a href="/Home/Index?currentPage=@i&term=@Model.Term">@i</a>
+
+		}
+	}
+
+</div> *@
+
+
+
+
+
+

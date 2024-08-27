@@ -1,0 +1,19 @@
+﻿@model MovieStore_Chili.Models.ViewModels.FrontPageVM
+@{
+    ViewData["Title"] = "SortedByPopularMovies";
+}
+
+
+<h1 align="center">Popular Movies</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            @Html.Partial("_SortedByPopularMoviesPartial", Model.PopulerMovies)
+
+        </div>
+    </div>
+</div>
+
+

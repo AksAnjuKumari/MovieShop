@@ -1,0 +1,99 @@
+﻿@model IEnumerable<MovieStore_Chili.Models.Database.OrderRow>
+
+@{
+    ViewData["Title"] = "Create";
+}
+<html>
+    <body>
+
+
+<h1>Shopping Cart</h1>
+<br/>
+<hr/>
+<table class="table" id="shoppingCartTable">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie.Director)
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            decimal total = 0;
+        }
+
+        @foreach (var item in Model)
+        {
+            total = total + item.Price;
+            <tr>
+                <td>
+                    <img style="height:60px;width:80px" src="/Images/@item.Movie.Image">
+                    @* @Html.DisplayFor(modelItem => item.Movie.Image) *@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Movie.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Movie.Director)
+                </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @if (item.Quantity == 1)
+                            {
+                                <a asp-action="RemoveOneFromCart" asp-route-id="@item.Movie.Id" class="disabled btn btn-outline-primary">-</a>
+                            }
+                            else
+                            {
+                                <a asp-action="RemoveOneFromCart" asp-route-id="@item.Movie.Id" class="btn btn-outline-primary">-</a>
+                            }
+                            <input type="button" value="@item.Quantity" class="p-2">
+                            <a asp-action="AddToCart" asp-route-id="@item.Movie.Id" class="btn btn-outline-primary">+</a>
+                        </div>
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="RemoveFromCart" asp-route-id="@item.Movie.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <th colspan="4">
+                Total Amount
+            </th>
+            <th>
+                @total
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+<a class="btn btn-success" asp-controller="Movie" asp-action="Index">Back</a>
+
+<a class="btn btn-success" asp-controller="Customer" asp-action="CustomerSearch">Check Out</a>
+
+</body>
+</html>

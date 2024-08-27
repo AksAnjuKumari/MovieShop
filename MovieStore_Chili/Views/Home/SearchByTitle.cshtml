@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MovieStore_Chili.Models.Database.Movie>
+@{
+    ViewData["Title"] = "SearchByTitle";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-12">
+                <partial name="_SearchByTitlePartial" model="item"></partial>
+            </div>
+        }
+    </div>
+ </div>
+

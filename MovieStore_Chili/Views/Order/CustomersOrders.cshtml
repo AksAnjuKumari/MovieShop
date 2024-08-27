@@ -1,0 +1,33 @@
+﻿@model MovieStore_Chili.Models.Database.Customer
+
+@{
+    ViewData["Title"] = "CustomersOrders";
+}
+
+<h1>Customers Orders</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Order" asp-action="ShowCustomerOrders">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input type="text" class="form-control" asp-for="Email" />
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Next" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-controller="Movie" asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+

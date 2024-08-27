@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MovieStore_Chili.Models.Database.Order>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Customer Name</th>
+            <th>Movie Title</th>
+            <th>Date</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                
+                <td>@order.Customer.FirstName @order.Customer.LastName</td>
+
+                <td >
+                    @foreach (var orderRow in order.OrderRows)
+                    {
+                        @orderRow.Movie.Title
+
+                        <br />
+                    }
+                </td>
+
+                <td>@order.OrderDate</td>
+                <td>@CalculateTotalPrice(order) Kr</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions {
+    decimal CalculateTotalPrice(MovieStore_Chili.Models.Database.Order order)
+    {
+        if (order is null)
+        {
+            throw new ArgumentNullException(nameof(order));
+        }
+
+        decimal totalPrice = 0;
+        foreach (var orderRow in order.OrderRows)
+        {
+            totalPrice += orderRow.Price;
+        }
+        return totalPrice;
+    }
+}

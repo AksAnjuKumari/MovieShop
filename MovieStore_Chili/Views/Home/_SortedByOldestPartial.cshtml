@@ -1,0 +1,55 @@
+@model IEnumerable<MovieStore_Chili.Models.Database.Movie>
+
+<div class="container offset-md-1">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2" style="padding-bottom:5px">
+                <div class="border border-5 p-2 text-center">
+                    <div>
+                        <img style="height:250px;width:130px" src="/Images/@item.Image" align="middle" />
+                    </div>
+
+                    <div>
+                        @item.Title
+                    </div>
+
+                    <div>
+                        @item.Director
+                    </div>
+
+                    <div>
+                        @item.ReleaseYear
+                    </div>
+
+                    <div>
+                        @item.Price Kr
+                    </div>
+
+                    <div>
+                        <input type="submit" onclick="fnClickSubmit(@item.Id)" value="Add to Cart" class="btn btn-success" />
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function fnClickSubmit(id) {
+
+        $.ajax({
+            url: '/Movie/AddToCartFromDashBoard',
+            type: 'POST',
+            dataType: 'json',
+            data: { id: id },
+            success: function (data) {
+               
+                var url = '@Url.Action("SortedByOldest","Home")';
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+

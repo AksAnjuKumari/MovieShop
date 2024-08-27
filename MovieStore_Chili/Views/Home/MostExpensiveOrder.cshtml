@@ -1,0 +1,19 @@
+﻿@model MovieStore_Chili.Models.ViewModels.FrontPageVM
+@{
+    ViewData["Title"] = "MostExpensiveOrder";
+}
+
+<h3>Customer with Most Expensive Order</h3>
+@if (Model.MostExpensiveOrderCustomerrName != null)
+{
+    <p>Name:@Model.MostExpensiveOrderCustomerrName.FirstName @Model.MostExpensiveOrderCustomerrName.LastName</p>
+    <p>Email:@Model.MostExpensiveOrderCustomerrName.Email</p>
+
+
+}
+else
+{
+    
+    <p>No Customers Found</p>
+}
+

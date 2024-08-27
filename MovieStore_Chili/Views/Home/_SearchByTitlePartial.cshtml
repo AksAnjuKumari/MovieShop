@@ -1,0 +1,27 @@
+﻿@model MovieStore_Chili.Models.Database.Movie
+
+<div class="col">
+    <div class="border border-5 p-2 text-center">
+        <div>
+            <img style="height:300px;width:200px" src="/Images/@Html.DisplayFor(model => model.Image)" align="middle" />
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.Title)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.Director)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.ReleaseYear)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.Price)
+        </div>
+        <div>
+            <form asp-controller="Movie" asp-action="AddToCart">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Add to Cart" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</div>

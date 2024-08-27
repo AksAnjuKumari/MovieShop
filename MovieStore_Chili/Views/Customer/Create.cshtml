@@ -1,0 +1,123 @@
+﻿@model MovieStore_Chili.Models.Database.Customer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Customer Registration</h1>
+
+<hr />
+<div class="container">
+    <form asp-controller="Customer" asp-action="Create">
+        <div class="row mt-3">
+            <div class="col-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control"  />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control"  />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control"  />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control"  />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+            </div>
+                <div class ="col-sm">
+                <input type="checkbox" id="copyAddressCheckbox" onchange="copyAddress()">
+                <label for="copyAddressCheckbox">Same as billing address</label>
+                </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm">
+                <div class="border border-primary border-2 p-4">
+                    <div class="form-group">
+                        <label asp-for="BillingAddress" class="control-label"></label>
+                        <input asp-for="BillingAddress" class="form-control"  />
+                        <span asp-validation-for="BillingAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label asp-for="BillingCity" class="control-label"></label>
+                        <input asp-for="BillingCity" class="form-control"  />
+                        <span asp-validation-for="BillingCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label asp-for="BillingZip" class="control-label"></label>
+                        <input asp-for="BillingZip" class="form-control"  />
+                        <span asp-validation-for="BillingZip" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="col-sm">
+                <div class="border border-primary border-2 p-4">
+                    <div class="form-group">
+                        <label asp-for="DeliveryAddress" class="control-label"></label>
+                        <input asp-for="DeliveryAddress" class="form-control"  />
+                        <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label asp-for="DeliveryCity" class="control-label"></label>
+                        <input asp-for="DeliveryCity" class="form-control"  />
+                        <span asp-validation-for="DeliveryCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label asp-for="DeliveryZip" class="control-label"></label>
+                        <input asp-for="DeliveryZip" class="form-control" />
+                        <span asp-validation-for="DeliveryZip" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm">
+                <input type="submit" value="Order Comfirm" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+        function copyAddress() {
+            // Check if the checkbox is checked
+            if (document.getElementById('copyAddressCheckbox').checked) {
+                // Copy values from billing address to delivery address
+            document.getElementById('DeliveryAddress').value = document.getElementById('BillingAddress').value;
+            document.getElementById('DeliveryCity').value = document.getElementById('BillingCity').value;
+            document.getElementById('DeliveryZip').value = document.getElementById('BillingZip').value;
+            } else {
+                // Clear delivery address fields
+            document.getElementById('DeliveryAddress').value = '';
+            document.getElementById('DeliveryCity').value = '';
+            document.getElementById('DeliveryZip').value = '';
+            }
+        }
+    </script>
+

@@ -1,0 +1,45 @@
+﻿@model List<MovieStore_Chili.Models.Database.Order>
+
+<div class="container">
+    
+    @foreach (var row in Model)
+    {
+        <div class="col-md-66">
+            <h3> Customer Name: @row.Customer.FirstName @row.Customer.LastName </h3>
+        </div>
+        break;
+    }
+    <h3>Total Orders :@Model.Count</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Order Date</th>
+              <th>Movie Title</th>
+              <th>Delivery Address</th>
+               <th>Total Price</th>
+            
+           </tr>
+        </thead>
+       
+    @foreach (var row in Model)
+    {
+       <tr>
+         <td> @row.OrderDate</td>
+         
+         <td>
+                    @foreach (var orderRow in row.OrderRows)
+                    {
+                        @orderRow.Movie.Title
+
+                        <br />
+                    }
+                </td>
+       <td>@row.Customer.DeliveryAddress </td>
+
+        <td>@row.OrderRows.Sum(or => or.Movie.Price) Kr</td>
+
+       </tr>
+        }
+    </table>
+    
+</div>
